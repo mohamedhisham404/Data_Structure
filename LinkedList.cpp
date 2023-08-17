@@ -35,7 +35,7 @@ public:
         sz=0;
     }
 
-    void add(T x){
+    void push_back(T x){
         node <T>*nw=new node(x);
         sz++;
         if(!head){ // if head is null
@@ -127,15 +127,26 @@ public:
         head = prev;
     }
 
+    //it is important to delete all nodes
+    //because all linked list is created in heap
+    ~LinkedList(){
+        node <T>*cur =head;
+        while(cur){
+            node <T>*temp=cur;
+            cur=cur->next;
+            delete temp;
+        }
+    }
+
 };
 
 
 int main(){
     LinkedList <double>l;
-    l.add(1.0);
-    l.add(2);
-    l.add(3);
-    l.add(4);
+    l.push_back(1.0);
+    l.push_back(2);
+    l.push_back(3);
+    l.push_back(4);
     // cout<<l.getData(0)<<endl;   //1
     // l.removeData(1);   //2-->3-->4-->null
     // l.removeidx(2);    //2-->3-->null
