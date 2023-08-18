@@ -2,27 +2,19 @@
 using namespace std;
 #define endl "\n"
 
-//any thing in the stack is auto deleted at the end of the scope
-//any local varaible is located in the stack
-// int *arr = new int[n];    to create object in heap
-//you should delete heap object(you can do it by destructor or delete keyword)
-// pointers deal with heap  
-
-
 template<class T>//for string ,int,....
 struct node{
         T data;
-        node* next,*pre;
+        node* next;
 
         node(T n=0){
             data=n;
             next=nullptr;
-            pre=nullptr;
         }
 };
 
 template<class T>
-class Stack 
+class Queue 
 {
 private:
     
@@ -31,7 +23,7 @@ private:
     int sz;
 
 public:
-    Stack(){
+    Queue(){
         head=nullptr;
         sz=0;
     }
@@ -45,24 +37,21 @@ public:
         }
         else{
             tail->next=nw;
-            nw->pre=tail;
             tail=nw;
         }
     }
 
     void pop(){
-        if(tail){
+        if(head){
             sz--;
-            node <T>*temp=tail;
-            tail=tail->pre;
-            tail->next=nullptr;
+            node <T>*temp=head;
+            head=head->next;
             delete temp;
         }
-
     }
 
-    T top(){
-        if(tail) return tail->data;
+    T front(){
+        if(head) return head->data;
         else return -1;
     }
     void print(){
@@ -80,7 +69,7 @@ public:
 
     //it is important to delete all nodes
     //because all linked list is created in heap
-    ~Stack(){
+    ~Queue(){
         node <T>*cur =head;
         while(cur){
             node <T>*temp=cur;
@@ -93,15 +82,15 @@ public:
 
 
 int main(){
-    Stack <int>s;
-    s.push(1);
-    s.push(2);
-    s.push(3);
-    s.push(4);
-    s.print();
-    s.pop();
-    s.print();
-    cout<<s.top()<<endl;
+    Queue <int>q;
+    q.push(1);
+    q.push(2);
+    q.push(3);
+    q.push(4);
+    q.print();
+    q.pop();
+    q.print();
+    cout<<q.front()<<endl;
 
     return 0;
 }
