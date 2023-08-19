@@ -6,7 +6,7 @@ const int T_size=15299;
 
 class HashSet{
 private:
-    // here we use polynomial hash function to hash strings
+    // here we use polynomial rolling hash function to hash strings
     vector<string>table[T_size];
     int hash_func(string s){
         int n=s.size();
